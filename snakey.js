@@ -45,19 +45,19 @@ function placeFood() {
 }
 
 function changeDirection(e) {
-    if (e.code =="ArrowUp") {
+    if (e.code =="ArrowUp" && speedY !=1) {
         speedX = 0;
         speedY = -1;
     }
-    else if (e.code =="ArrowDown") {
+    else if (e.code =="ArrowDown" && speedY != -1) {
         speedX = 0;
         speedY = 1;
     }
-    else if (e.code =="ArrowLeft") {
+    else if (e.code =="ArrowLeft" && speedX !=1) {
         speedX = -1;
         speedY = 0;
     }
-    else if (e.code =="ArrowRight") {
+    else if (e.code =="ArrowRight" && speedX != -1) {
         speedX = 1;
         speedY = 0;
     }
@@ -68,14 +68,19 @@ function update() {
     context.fillStyle = "gray";
     context.fillRect(0,0,board.width, board.height);
 
-    //snake head's properties
-    context.fillStyle= "lime"
-    snakeX += speedX * blocksize/2;
-    snakeY += speedY * blocksize/2; 
-    context.fillRect(snakeX,snakeY,blocksize,blocksize);
-
-
     //food's properites
     context.fillStyle= "red"
     context.fillRect(foodX,foodY,blocksize,blocksize);
+    if(snakeX == foodX && snakeY == foodY){
+        placeFood();
+    }
+
+    //snake head's properties
+    context.fillStyle= "lime"
+    snakeX += speedX * blocksize;
+    snakeY += speedY * blocksize; 
+    context.fillRect(snakeX,snakeY,blocksize,blocksize);
+
+
+    
 }
