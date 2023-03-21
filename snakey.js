@@ -19,6 +19,9 @@ var context;
 var snakeX = blocksize * 5;
 var snakeY = blocksize * 5;
 
+//food
+var foodX = blocksize * 10;
+var foodY = blocksize * 10;
 
 window.onload = function(){
     board = document.getElementById("board");
@@ -37,6 +40,10 @@ function update() {
     context.fillRect(0,0,board.width, board.height);
 
     //snake head's properties
-    context.fillStyle= "green"
+    context.fillStyle= "lime"
     context.fillRect(snakeX,snakeY,blocksize,blocksize);
+
+    //food's properites
+    context.fillStyle= "red"
+    context.fillRect(foodX,foodY,blocksize,blocksize);
 }
