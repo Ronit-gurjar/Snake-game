@@ -23,6 +23,9 @@ var snakeY = blocksize * 5;
 var speedX = 0;
 var speedY = 0;
 
+//snake body
+var snakeBody = [];
+
 //food
 var foodX;
 var foodY;
@@ -72,15 +75,28 @@ function update() {
     context.fillStyle= "red"
     context.fillRect(foodX,foodY,blocksize,blocksize);
     if(snakeX == foodX && snakeY == foodY){
+        snakeBody.push([foodX,foodY]);
         placeFood();
     }
 
-    //snake head's properties
+    for(let i = snakeBody.length-1; i>0;i--){
+        //to make the body follow head along
+        snakeBody[i] = snakeBody[i-1];
+    }
+    if (snakeBody.length) {
+        //to attach body with head
+        snakeBody[0] = [snakeX, snakeY];
+    }
+
+    //snake head's and body's properties
     context.fillStyle= "lime"
     snakeX += speedX * blocksize;
     snakeY += speedY * blocksize; 
     context.fillRect(snakeX,snakeY,blocksize,blocksize);
-
+    for (let i = 0; i < snakeBody.length; i++) {
+        //if food eaten, increase snake
+        context.fillRect(snakeBody[i][0], snakeBody[i][1], blocksize, blocksize);
+    }
 
     
 }
