@@ -15,6 +15,11 @@ var cols= 20;
 var board;
 var context;
 
+//snake head
+var snakeX = blocksize * 5;
+var snakeY = blocksize * 5;
+
+
 window.onload = function(){
     board = document.getElementById("board");
 
@@ -27,6 +32,11 @@ window.onload = function(){
 }
 
 function update() {
+    //board's properties
     context.fillStyle = "gray";
     context.fillRect(0,0,board.width, board.height);
+
+    //snake head's properties
+    context.fillStyle= "green"
+    context.fillRect(snakeX,snakeY,blocksize,blocksize);
 }
