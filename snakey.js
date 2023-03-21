@@ -1,6 +1,8 @@
 
 /*
 in HTML canvas, we can develop graphics using tiles. this tiles can be accessed using x and y coordinates.
+
+for snakes movements:-
 -1<---x--->+1    &     up -1
  left     right            |
                            y
@@ -20,8 +22,8 @@ var snakeX = blocksize * 5;
 var snakeY = blocksize * 5;
 
 //food
-var foodX = blocksize * 10;
-var foodY = blocksize * 10;
+var foodX;
+var foodY;
 
 window.onload = function(){
     board = document.getElementById("board");
@@ -30,7 +32,7 @@ window.onload = function(){
     board.width = cols* blocksize;
 
     context = board.getContext("2d")// for drawing on the board
-
+    placeFood();//placing food on board
     update();
 }
 
@@ -46,4 +48,9 @@ function update() {
     //food's properites
     context.fillStyle= "red"
     context.fillRect(foodX,foodY,blocksize,blocksize);
+}
+
+function placeFood() {
+    foodX=Math.floor(Math.random() * cols) * blocksize;
+    foodY=Math.floor(Math.random() * rows) * blocksize;
 }
