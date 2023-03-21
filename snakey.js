@@ -11,7 +11,7 @@ for snakes movements:-
 */ 
 
 //board
-var blocksize= 25;
+var blocksize= 30;
 var rows= 20;
 var cols= 20;
 var board;
@@ -29,6 +29,9 @@ var snakeBody = [];
 //food
 var foodX;
 var foodY;
+
+//end
+var gameOver = false;
 
 window.onload = function(){
     board = document.getElementById("board");
@@ -67,6 +70,9 @@ function changeDirection(e) {
 }
 
 function update() {
+    if (gameOver){
+        return;
+    }
     //board's properties
     context.fillStyle = "gray";
     context.fillRect(0,0,board.width, board.height);
@@ -98,5 +104,16 @@ function update() {
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blocksize, blocksize);
     }
 
-    
+  // gameover conditions:-
+    if (snakeX <0 || snakeX >cols*blocksize || snakeY >rows*blocksize) {
+        gameOver = true;
+        alert("GAME OVER!!!")
+    }
+    for (let i = 0; i < snakeBody.length; i++) {
+        if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
+            gameOver = true;
+            alert("GAME OVER!!!");
+        }
+    }
+  
 }
